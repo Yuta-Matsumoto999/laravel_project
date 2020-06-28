@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Buy;
 
 class BuysTableSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class BuysTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Buy::class, 100)->create();
     }
 }

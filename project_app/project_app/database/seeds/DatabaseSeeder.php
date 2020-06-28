@@ -1,5 +1,6 @@
 <?php
 
+use App\TagCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        $this->call([UsersTableSeeder::class,
+                     TagCategoriesTableSeeder::class,
+                     ProductsTableSeeder::class,
+                     CartsTableSeeder::class,
+                     BuysTableSeeder::class,
+                     ContactsTableSeeder::class
+        ]);
     }
 }

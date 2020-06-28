@@ -2,11 +2,13 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Cart;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Cart::class, function (Faker $faker) {
     return [
-        //
+        'user_id' => $faker->numberBetween(1, 10),
+        'product_id' => $faker->numberBetween(1, 100),
+        'quentity' => $faker->numberBetween(1, 6)
     ];
 });
