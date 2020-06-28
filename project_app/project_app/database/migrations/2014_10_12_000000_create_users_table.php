@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name')->comment('表示名');
             $table->string('email')->nullable()->comment('email');
             $table->string('password')->nullable()->comment('ログインパスワード');
+            $table->integer('address_num')->nullable()->comment('郵便番号');
+            $table->string('address')->nullable()->comment('住所');
         
             $table->string('avatar')->nullable()->comment('アイコンのURL');
             $table->string('twitter_id')->unique()->nullable()->comment('twitterの内部ID');

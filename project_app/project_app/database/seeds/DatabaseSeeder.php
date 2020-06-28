@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
                      TagCategoriesTableSeeder::class,
                      ProductsTableSeeder::class,
                      CartsTableSeeder::class,
-                     BuysTableSeeder::class,
                      ContactsTableSeeder::class
         ]);
     }

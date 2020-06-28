@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 use App\Product;
+use Auth;
 
 class Cart extends Model
 {
     use SoftDeletes;
 
-    protected $lillable = [
+    protected $fillable = [
         'user_id',
         'product_id',
         'quentity'
@@ -22,10 +23,14 @@ class Cart extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function product()
+    public function products()
     {
         return $this->belongsTo(Product::class, 'user_id');
     }
 
+    public function checkoutCart()
+    {
+        $this->where('user_id', Auth::id())->delete();
+    }
 
 }

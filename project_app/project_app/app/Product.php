@@ -22,7 +22,7 @@ class Product extends Model
     ];
 
     protected $dates = [
-        'updated_at'
+        'created_at'
     ];
 
     public function tagCategories()
