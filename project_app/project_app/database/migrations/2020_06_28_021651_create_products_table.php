@@ -18,12 +18,12 @@ class CreateProductsTable extends Migration
             $table->integer('tag_category_id')->unsigned();
             $table->string('name', 45);
             $table->integer('price');
-            $table->stirng('photo')->nullable();
+            $table->string('photo')->nullable();
             $table->text('content', 1000);
             $table->timestamps();
             $table->softDeletes();
 
-            // $table->foreign('tag_category_id')->references('id')->on('tag_categories');
+            $table->foreign('tag_category_id')->references('id')->on('tag_categories');
         });
     }
 
