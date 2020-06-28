@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/sale', 'SaleController@index')->name('sale.index');
 Route::get('/sale/contact', 'SaleController@showContact')->name('sale.show.contact');
 Route::get('/sale/cart', 'SaleController@showCart')->name('sale.show.cart');
+Route::get('/sale/product/{id}', 'SaleController@showCartProduct')->name('sale.show.cart.product');
 Route::get('/sale/product/{id}', 'SaleController@showProduct')->name('sale.show.product');
 Route::get('/sale/buys', 'SaleController@showBuys')->name('sale.show.buys');
 Route::get('/sale/cart/purchase', 'SaleController@showCartPurchase')->name('sale.show.cart.purchase');
