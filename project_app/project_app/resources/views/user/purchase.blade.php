@@ -58,16 +58,16 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-right">
-        <h5 class="product-price">小計   プライス円</h5>
+        <h5 class="product-price">小計   {{ $sumPrice }}円</h5>
       </div>
       <div class="col-12 text-right">
-        <h5 class="product-price">消費税   プライス円</h5>
+        <h5 class="product-price">消費税   {{ round($taxPrice) }}円</h5>
       </div>
       <div class="col-12 text-right">
         <h5 class="product-price">送料   無料</h5>
       </div>
       <div class="col-12 text-right">
-        <h3 class="product-price">合計金額   プライス円</h3>
+        <h3 class="product-price">合計金額   {{ round($totalPrice) }}円</h3>
       </div>
     </div>
   </div>

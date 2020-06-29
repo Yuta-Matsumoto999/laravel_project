@@ -30,10 +30,10 @@ class SaleController extends Controller
 
     public function index(Request $request)
     {
-        $inputs = $request->all();
-        $products = $this->product->paginate(10);
+        $searches = $request->all();
+        $products = $this->product->getBySearches($searches);
         $tagCategories = $this->tagCategory->all();
-        return view('user.index', compact('products', 'tagCategories'));
+        return view('user.index', compact('products', 'tagCategories', 'searches'));
     }
 
     public function showContact()
@@ -58,16 +58,19 @@ class SaleController extends Controller
     public function storeCart(CartRequest $request, $productId)
     {
         $input = $request->all();
+        $inputs = $input['price'] * $input['quentity'];
         $this->cart->user_id = Auth::id();
-        $this->cart->product_id = $productId;
+        $this->cart->sumPrice = $inputs;
         $this->cart->fill($input)->save();
         return redirect()->route('sale.show.cart');
     }
 
     public function showCart()
     {
-        $carts = $this->cart->where('user_id', Auth::id())->paginate(10);
-        return view('user.cart', compact('carts'));
+        $carts = $this->cart->where('user_id', Auth::id())->get();
+        $sumQuentity = $carts->count('quentity');
+        $sumPrice = $carts->sum('sumPrice');
+        return view('user.cart', compact('carts', 'sumQuentity', 'sumPrice'));
     }
 
     public function showCartProduct($cartId)
@@ -88,7 +91,10 @@ class SaleController extends Controller
     {
         $users = $this->user->find(Auth::id());
         $carts = $this->cart->where('user_id', Auth::id())->get();
-        return view('user.purchase', compact('users', 'carts'));
+        $sumPrice = $carts->sum('sumPrice');
+        $taxPrice = $sumPrice * 0.1;
+        $totalPrice = $sumPrice + $taxPrice;
+        return view('user.purchase', compact('users', 'carts', 'sumPrice' ,'taxPrice', 'totalPrice'));
     }
 
 

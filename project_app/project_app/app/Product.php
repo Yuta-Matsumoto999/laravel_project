@@ -39,4 +39,16 @@ class Product extends Model
     {
         return $this->hasMany(Buy::class, 'product_id');
     }
+
+    public function getBySearches($searches)
+    {
+        return $this->when(isset($searches['tag_category_id']), function ($query) use ($searches) {
+            $query->where('tag_category_id', $searches['tag_category_id']);
+        })->when(isset($searches['name']), function ($query) use ($searches) {
+            $query->where('name', 'like', '%' . $searches['name'] . '%');
+        })
+        ->orderBy('updated_at')
+        ->paginate(10);
+    }
+
 }

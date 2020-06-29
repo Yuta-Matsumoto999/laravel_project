@@ -15,7 +15,9 @@ class Cart extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'quentity'
+        'quentity',
+        'price',
+        'sumPrice'
     ];
 
     public function user()
@@ -28,9 +30,16 @@ class Cart extends Model
         return $this->belongsTo(Product::class, 'user_id');
     }
 
+    public function sumPrice($input)
+    {
+        $sumPrice = $input['price'] * $input['quentity'];
+        return $sumPrice;
+    }
+
     public function checkoutCart()
     {
         $this->where('user_id', Auth::id())->delete();
     }
+
 
 }

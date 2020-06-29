@@ -9,7 +9,11 @@
           <h1>My Cart</h1>
         </div>
         <div class="col-4 align-middle">
-          <h3>小計 (個の商品) (税込) : 円</h3>
+          @if ($carts->isNotEmpty())
+          <h5>小計 ({{ $sumQuentity }}個の商品) (税込) : {{ $sumPrice }}円</h5>
+          @else
+          <h5>小計 (0個の商品) (税込) : 0円</h5>
+          @endif
         </div>
       </div>
       @if ($carts->isNotEmpty())
@@ -34,7 +38,7 @@
                 </tr>
                 <tr>
                   <th>PRICE</th>
-                  <td>{{ $cart->products->price }}円 +税</td>
+                  <td>{{ $cart->price }}円 +税</td>
                 </tr>
                 <tr>
                   <th>数量</th>

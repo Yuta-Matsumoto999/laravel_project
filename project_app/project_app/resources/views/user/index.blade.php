@@ -48,22 +48,37 @@
       <div class="container">
         <h1 class="mb-3">Products</h1>
         <h5>SELECT YOUR FAVORITE ITEMS!!</h5>
+        {!! Form::open(['route' =>['sale.index',], 'method' => 'GET']) !!}
+        <div class="form-row">
+          <div class="form-group col-10 text-center">
+            {!! Form::text('name', $searches['name'] ??  null, ['class' => 'form-control', 'placeholder' => 'Seach Product...']) !!}
+          </div>
+          <div class="form-group col-2 text-center">
+            {!! Form::submit('検索', ['class' => 'btn btn-primary']) !!}
+          </div>
+        </div>
         <!-- タブ型ナビゲーション -->
-        <div class="nav nav-tabs" id="tab-menus" role="tablist">
+        <div class="nav nav-tabs category-wrap" id="tab-menus" role="tablist">
           <!-- タブ01 -->
-          <a class="nav-item nav-link active" id="tab-menu01" data-toggle="tab" href="#panel-menu01" role="tab" aria-controls="panel-menu01" aria-selected="true">コーヒー</a>
-          <!-- タブ02 -->
+          <a class="nav-item nav-link active category" id="" data-toggle="tab" href="#panel-menu01" role="tab" aria-controls="panel-menu01" aria-selected="true">ALL</a>
+          @foreach ($tagCategories as $tagCategory)
+          <a class="nav-item nav-link active category" id="{{ $tagCategory->id }}" data-toggle="tab" href="#panel-menu01" role="tab" aria-controls="panel-menu01" aria-selected="true">{{ $tagCategory->name }}</a>
+          @endforeach
+          {!! Form::hidden('tag_category_id', $searches['tag_category_id'] ??  null, ['id' => 'category-val']) !!}
+
+        {!! Form::close() !!}
+          {{-- <!-- タブ02 -->
           <a class="nav-item nav-link" id="tab-menu02" data-toggle="tab" href="#panel-menu02" role="tab" aria-controls="panel-menu02" aria-selected="false">モーニング</a>
           <!-- タブ03 -->
           <a class="nav-item nav-link" id="tab-menu03" data-toggle="tab" href="#panel-menu03" role="tab" aria-controls="panel-menu03" aria-selected="false">ランチ</a>
           <!-- タブ04 -->
-          <a class="nav-item nav-link" id="tab-menu04" data-toggle="tab" href="#panel-menu04" role="tab" aria-controls="panel-menu04" aria-selected="false">ケーキ</a>
+          <a class="nav-item nav-link" id="tab-menu04" data-toggle="tab" href="#panel-menu04" role="tab" aria-controls="panel-menu04" aria-selected="false">ケーキ</a> --}}
         </div>
         <!-- /タブ型ナビゲーション -->
         <!-- パネル -->
         <div class="tab-content" id="panel-menus">
-          <div class="tab-pane fade show active border border-top-0" id="panel-menu01" role="tabpanel" aria-labelledby="tab-menu01">
-            @foreach ($products as $product)
+          @foreach ($products as $product)
+          <div class="tab-pane fade show active border border-top-0" id="{{ $product->tagCategories->id }}" role="tabpanel" aria-labelledby="tab-menu01">
             <div class="row p-3">
               <div class="col-md-7 order-md-2">
                 <h4>{{ $product->name }}</h4>
@@ -102,10 +117,17 @@
             @endforeach
           </div>
         </div>
-          {{ $products->links() }}
+        {{-- {{ $users->appends($searches)->links() }} --}}
         </div>
       </div>
     </section>
   </div>
 </main>
+<script>
+  $('.category-wrap .category').on('click', function(){
+    var category_id = $(this).attr('id');
+    $('#category-val').val(category_id);
+    $('form').submit();
+  });
+</script>
 @endsection
