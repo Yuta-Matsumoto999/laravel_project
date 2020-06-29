@@ -108,16 +108,12 @@
                 </table>
               </div>
               <div class="col-md-5">
-                @if ($product->photo === null)
-                <a href="{{ route('sale.show.product', $product->id) }}"><img src="" alt="画像がありません" class="img-fluid"></a> </div>
-                @else
-                <a href="{{ route('sale.show.product', $product->id) }}"><img src="" alt="" class="img-fluid"></a> </div>
-                @endif
+                <a href="{{ route('sale.show.product', $product->id) }}"><img src="{{ $product->photo }}" alt="画像がありません" class="img-fluid"></a></div>
             </div>
             @endforeach
           </div>
         </div>
-        {{-- {{ $users->appends($searches)->links() }} --}}
+        {{ $products->appends($searches)->links() }}
         </div>
       </div>
     </section>

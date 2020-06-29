@@ -10,7 +10,7 @@
         </div>
         <div class="col-4 align-middle">
           @if ($carts->isNotEmpty())
-          <h5>小計 ({{ $sumQuentity }}個の商品) (税込) : {{ $sumPrice }}円</h5>
+          <h5>小計 ({{ $sumQuentity }}個の商品) (税抜) : {{ $sumPrice}}円</h5>
           @else
           <h5>小計 (0個の商品) (税込) : 0円</h5>
           @endif
@@ -48,7 +48,7 @@
             </table>
           </div>
           <div class="col-md-5">
-            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="img/coffee.jpg" alt="コーヒー" class="img-fluid"></a> 
+            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="{{ $cart->products->photo }}" alt="画像がありません" class="img-fluid"></a> 
           </div>
         </div>
         <div class="row">

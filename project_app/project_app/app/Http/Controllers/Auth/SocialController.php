@@ -26,7 +26,7 @@ class SocialController extends Controller
         $authUser = $this->findOrCreateTwitterUser($user);
         Auth::login($authUser, true);
  
-        return redirect()->route('home');
+        return redirect()->route('sale.index');
     }
 
     private function findOrCreateTwitterUser($twitterUser)

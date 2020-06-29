@@ -5,6 +5,7 @@
 <meta name="voewport" content="width-device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="css/boootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <title>ECサイト</title>
 </head>
 <body>
@@ -32,11 +33,16 @@
       <!-- ナビゲーションメニュー -->
       <!-- 左側メニュー：トップページの各コンテンツへのリンク -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="{{ route('sale.index') }}">Top <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('sale.index') }}">Top </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('sale.show.contact') }}">Contact</a>
+        </li>
+        <li class="nav-item">
+          {!! Form::open(['route' => ['logout']]) !!}
+            {!! Form::submit('Logout', ['class' => 'btn btn-primary']) !!}
+          {!! Form::close() !!}
         </li>
       </ul>
       <!-- 右側メニュー：Contactページへのリンク -->
@@ -63,6 +69,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('sale.show.contact') }}">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
       </li>
     </ul>
     <!-- /ナビゲーション -->

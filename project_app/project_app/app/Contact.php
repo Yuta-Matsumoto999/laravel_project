@@ -10,7 +10,7 @@ class Contact extends Model
 {
     use SoftDeletes;
 
-    protected $lillable = [
+    protected $fillable = [
         'user_id',
         'title',
         'content'

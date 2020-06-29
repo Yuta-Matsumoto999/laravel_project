@@ -27,7 +27,7 @@ class Cart extends Model
 
     public function products()
     {
-        return $this->belongsTo(Product::class, 'user_id');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function sumPrice($input)
@@ -40,6 +40,5 @@ class Cart extends Model
     {
         $this->where('user_id', Auth::id())->delete();
     }
-
 
 }

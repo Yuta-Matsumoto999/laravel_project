@@ -5,8 +5,16 @@
   <div class="py-4">
     <div class="container">
       <div class="row">
-        <div class="col-12">
-          <img src="" alt="" class=".img-fluid rounded text-center">
+        <div class="col">
+          @if ($cart->products->phpto === null)
+          <div class="text-center">
+            <img src="{{ asset('/logo.image/20150701073916.png') }}" alt="商品画像がありません" class="img-fluid">
+          </div>
+          @else
+          <div class="text-center">
+            <img src="" alt="商品画像がありません" class="img-fluid rounded text-center">
+          </div>
+          @endif
         </div>
       </div>
     </div>
@@ -31,8 +39,8 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 text-center">
-            <h5>{{ $cart->products->content }}</h5>
+          <div class="col-12">
+            <p class="text-justify">{{ $cart->products->content }}</p>
           </div>
         </div>
       </div>
@@ -41,6 +49,7 @@
               <label for="quentity1">数量</label>
               {!! Form::text('quentity', $cart->quentity, ['class' => 'form-control form-control-sm', 'id' => 'quentity1', 'placeholder' => '1']) !!}
               <span class="help-block">{{ $errors->first('quentity') }}</span>
+              {!! Form::hidden('price', $cart->products->price) !!}
             </div>
             <div class="form-group text-center">
               {!! Form::submit('変更する', ['class' => 'btn btn-primary']) !!}

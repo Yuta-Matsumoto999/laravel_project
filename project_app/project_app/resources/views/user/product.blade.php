@@ -21,7 +21,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-          <h3 id="jsPrice">小計  (税抜) : {{ $product->price }}円</h3>
+          <h3 class="buy_item_menu" date-price="{{ $product->price }}">小計  (税抜) : {{ $product->price }}円</h3>
         </div>
       </div>
       <div class="row">
@@ -39,8 +39,8 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 text-center">
-            <h5>{{ $product->content }}</h5>
+          <div class="col-12">
+            <p class="text_justify">{{ $product->content }}</p>
           </div>
         </div>
       </div>
@@ -50,12 +50,11 @@
               <label for="quentity1">数量</label>
               {!! Form::text('quentity', null, ['class' => 'form-control form-control-sm', 'id' => 'jsNum', 'placeholder' => '1'])!!}
               <span class="help-block">{{ $errors->first('quentity') }}</span>
+              {!! Form::hidden('price', $product->price) !!}
             </div>
             <div class="form-group text-center">
-              {!! Form::submit('カートに入れる', ['class' => 'btn btn-primary']) !!}
+              {!! Form::submit('カートに入れる', ['class' => 'btn btn-primary total-sum']) !!}
             </div>
-            {!! Form::hidden('price', $product->price) !!}
-            {!! Form::hidden('product_id', $product->id) !!}
           </div>
         {!! Form::close() !!}
     </div>

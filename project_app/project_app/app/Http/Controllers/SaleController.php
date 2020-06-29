@@ -10,6 +10,8 @@ use App\Product;
 use App\Cart;
 use App\TagCategory;
 use App\User;
+use App\Contact;
+use Illuminate\Support\Facades\DB;
 use Auth;
 
 class SaleController extends Controller
@@ -18,14 +20,16 @@ class SaleController extends Controller
     private $cart;
     private $tagCategory;
     private $user;
+    private $contact;
 
-    public function __construct(Product $product, Cart $cart, TagCategory $tagCategory, User $user)
+    public function __construct(Product $product, Cart $cart, TagCategory $tagCategory, User $user, Contact $contact)
     {
         $this->middleware('auth');
         $this->product = $product;
         $this->cart = $cart;
         $this->tagCategory = $tagCategory;
         $this->user = $user;
+        $this->contact = $contact;
     }
 
     public function index(Request $request)
@@ -44,7 +48,8 @@ class SaleController extends Controller
 
     public function storeContact(ContactRequest $request)
     {
-        $input = $request->all();
+        $input = $request->except('name', 'email');
+        $this->contact->user_id = Auth::id();
         $this->contact->fill($input)->save();
         return redirect()->route('sale.index');
     }
@@ -57,11 +62,12 @@ class SaleController extends Controller
 
     public function storeCart(CartRequest $request, $productId)
     {
-        $input = $request->all();
-        $inputs = $input['price'] * $input['quentity'];
+        $inputs = $request->all();
         $this->cart->user_id = Auth::id();
-        $this->cart->sumPrice = $inputs;
-        $this->cart->fill($input)->save();
+        $sumPrice = $inputs['quentity']*$inputs['price'];
+        $this->cart->sumPrice = $sumPrice;
+        $this->cart->product_id = $productId;
+        $this->cart->fill($inputs)->save();
         return redirect()->route('sale.show.cart');
     }
 
@@ -81,9 +87,11 @@ class SaleController extends Controller
 
     public function updateCart(CartRequest $request, $cartId)
     {
-        $input = $request->all();
-        $this->cart->find($cartId)->fill($input)->save();
-        return redirect()->route('sale.show.cart');
+        $inputs = $request->all();
+        $sumPrice = $inputs['quentity']*$inputs['price'];
+        $this->cart->find($cartId)->fill($inputs)->save();
+        $this->cart->find($cartId)->sumPrice = $sumPrice;
+        return redirect()->route('sale.index');
 
     }
 

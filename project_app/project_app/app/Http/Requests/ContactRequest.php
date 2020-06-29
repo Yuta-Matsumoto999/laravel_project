@@ -24,7 +24,7 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-          'title' => "required|integer|max: 50",
+          'title' => "required|string|max: 50",
           'content' => "required|string|max: 1000"
         ];
     }
@@ -39,7 +39,6 @@ class ContactRequest extends FormRequest
         return [
             'required' => '必須の項目です',
             'string' => '文字列以外は入力できません',
-            'integer' => '数字のみで入力してください',
             'max' => "最大文字数は:max文字です"
         ];
     }

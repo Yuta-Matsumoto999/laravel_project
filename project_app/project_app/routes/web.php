@@ -17,7 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', function () {
+    return redirect()->route('sale.index');
+});
+
 Auth::routes();
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('auth/login/twitter', 'Auth\SocialController@getTwitterAuth');
 Route::get('auth/login/callback/twitter', 'Auth\SocialController@getTwitterAuthCallback');
 

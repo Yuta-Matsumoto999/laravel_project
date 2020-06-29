@@ -6,7 +6,7 @@
     <div class="container justify-content-center align-items-center">
       <div class="container justify-content-center align-items-center text-center">
         <h1>Thank You!!</h1>
-        <p>お買い上げありがとうございます!！ <br> 商品到着までしばらくお待ちください！！</p>
+        <p>{{ Auth::user()->name }} 様お買い上げありがとうございます!！ <br> 商品到着までしばらくお待ちください！！</p>
       </div>
 
       <div class="container justify-content-center align-items-center text-center">
