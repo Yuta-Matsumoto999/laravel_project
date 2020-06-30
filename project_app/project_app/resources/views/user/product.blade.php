@@ -8,11 +8,11 @@
         <div class="col">
           @if ($product->phpto === null)
           <div class="text-center">
-            <img src="{{ asset('/logo.image/20150701073916.png') }}" alt="商品画像がありません" class="img-fluid">
+            <img src="/logo.image/20150701073916.png" alt="商品画像がありません" class="img-fluid">
           </div>
           @else
           <div class="text-center">
-            <img src="" alt="商品画像がありません" class="img-fluid rounded text-center">
+            <img src="/image/{{ $product->photo }}" alt="商品画像がありません" class="img-fluid rounded text-center">
           </div>
           @endif
         </div>

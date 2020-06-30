@@ -18,17 +18,17 @@
         <div class="carousel-inner">
           <!-- スライド01 -->
           <div class="carousel-item active">
-            <img class="img-fluid text-center" src="{{ asset('/logo.image/apartado-GAMAS-eskudo-final.jpg') }}" alt="">
+            <img class="img-fluid text-center" src="/logo.image/apartado-GAMAS-eskudo-final.jpg" alt="">
           </div>
           <!-- / スライド01 -->
           <!-- スライド02 -->
           <div class="carousel-item">
-            <img class="img-fluid" src="{{ asset('/logo.image/maxresdefault.jpg') }}" alt="">
+            <img class="img-fluid" src="/logo.image/maxresdefault.jpg" alt="">
           </div>
           <!-- / スライド02 -->
           <!-- スライド03 -->
           <div class="carousel-item">
-            <img class="img-fluid" src="{{ asset('/logo.image/home-kv.png') }}" alt="">
+            <img class="img-fluid" src="/logo.image/home-kv.png" alt="">
           </div>
           <!-- / スライド03 -->
         </div>
@@ -108,7 +108,7 @@
                 </table>
               </div>
               <div class="col-md-5">
-                <a href="{{ route('sale.show.product', $product->id) }}"><img src="{{ $product->photo }}" alt="画像がありません" class="img-fluid"></a></div>
+                <a href="{{ route('sale.show.product', $product->id) }}"><img src="/product.image/{{ $product->photo }}" alt="画像がありません" class="img-fluid"></a></div>
             </div>
             @endforeach
           </div>

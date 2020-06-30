@@ -89,8 +89,8 @@ class SaleController extends Controller
     {
         $inputs = $request->all();
         $sumPrice = $inputs['quentity']*$inputs['price'];
-        $this->cart->find($cartId)->fill($inputs)->save();
         $this->cart->find($cartId)->sumPrice = $sumPrice;
+        $this->cart->find($cartId)->fill($inputs)->save();
         return redirect()->route('sale.index');
 
     }

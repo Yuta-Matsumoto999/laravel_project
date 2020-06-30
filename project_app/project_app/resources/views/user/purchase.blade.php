@@ -41,7 +41,7 @@
             {{ Form::hidden('product_id', $cart->products->id) }}
           </div>
           <div class="col-md-5">
-            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="img/coffee.jpg" alt="コーヒー" class="img-fluid"></a> 
+            <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="img/{{ $cart->products->photo }}" alt="" class="img-fluid"></a> 
           </div>
         </div>
         <div class="row">

@@ -16,7 +16,7 @@
 <!-- ヘッダー -->
 <header class="py-4">
   <div class="container text-center">
-    <img src="{{ asset('/logo.image/hosoccer-2018model.jpg') }}" alt="" class="img-fluid">
+    <img src="/logo.image/hosoccer-2018model.jpg" alt="" class="img-fluid">
   </div>
 </header>
 
@@ -76,7 +76,7 @@
     </ul>
     <!-- /ナビゲーション -->
     <p>
-      <small>Copyright &copy;2018 Mr. M COFFEE, All Rights Reserved.</small>
+      <small>Copyright &copy;2018 HO SOCCER JAPAN, All Rights Reserved.</small>
     </p>
   </div>
 </footer>
