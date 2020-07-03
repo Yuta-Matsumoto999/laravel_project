@@ -42,7 +42,6 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mypage</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="">購入履歴</a>
             <a class="dropdown-item" href="{{ route('sale.show.myquestion') }}">問い合わせ一覧</a>
           </div>
         </li>
