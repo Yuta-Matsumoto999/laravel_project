@@ -44,6 +44,10 @@
                   <th>数量</th>
                   <td>{{ $cart->quentity }} 個</td>
                 </tr>
+                <tr>
+                  <th>小計</th>
+                  <td>{{ $cart->sumPrice }} 円 (税抜)</td>
+                </tr>
               </tbody>
             </table>
           </div>

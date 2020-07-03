@@ -30,25 +30,21 @@
                 </tr>
                 <tr>
                   <th>PRICE</th>
-                  <td>{{ $cart->products->price }}円 +税</td>
+                  <td>{{ $cart->price }}円 +税</td>
                 </tr>
                 <tr>
                   <th>数量</th>
                   <td>{{ $cart->quentity }} 個</td>
                 </tr>
+                <tr>
+                  <th>小計</th>
+                  <td>{{ $cart->sumPrice }} 円 (税抜)</td>
+                </tr>
               </tbody>
             </table>
-            {{ Form::hidden('product_id', $cart->products->id) }}
           </div>
           <div class="col-md-5">
             <a href="{{ route('sale.show.cart.product', $cart->id) }}"><img src="img/{{ $cart->products->photo }}" alt="" class="img-fluid"></a> 
-          </div>
-        </div>
-        <div class="row">
-          <div class="col text-right">
-            {!! Form::open(['route' => ['sale.destroy.cart', $cart->id], 'method' => 'DELETE']) !!}
-              {!! Form::submit('カートから削除', ['class' => 'btn btn-primary']) !!}
-            {!! Form::close() !!}
           </div>
         </div>
       </div>
@@ -78,31 +74,17 @@
       </div>
       <div class="col-12">
         {!! Form::open(['route' => ['sale.store.cart.purchase']]) !!}
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="name1">お名前</label>
-              {!! Form::text('name', $users->name, ['class' => 'form-control', 'id' => 'name1', 'placeholder' => 'お名前', 'readonly']) !!}
-            </div>
-            <div class="form-group col-md-6">
-              <label for="email1">メールアドレス</label>
-              {!! Form::email('email', $users->email, ['class' => 'form-control', 'id' => 'email1', 'placeholder' => 'example@gmail.com', 'readonly']) !!}
-            </div>
+          <div class="form-group">
+            <label for="name1">お名前</label>
+            {!! Form::text('name', $users->name, ['class' => 'form-control', 'id' => 'name1', 'placeholder' => 'お名前', 'readonly']) !!}
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-3 @if($errors->has('address_num')) has-error @endif">
-              <label for="address_num1">郵便番号</label>
-              {!! Form::text('address_num', $users->address_num, ['class' => 'form-control', 'id' => 'address_num1', 'placeholder' => '1234567']) !!}
-              <span class="help-block">{{ $errors->first('address_num') }}</span>
-            </div>
-            <div class="form-group col-md-9 @if($errors->has('address')) has-error @endif">
-              <label for="address1">住所</label>
-              {!! Form::text('address', $users->address, ['class' => 'form-control', 'id' => 'address1', 'placeholder' => 'ご住所']) !!}
-              <span class="help-block">{{ $errors->first('address') }}</span>
-            </div>
+          <div class="form-group">
+            <label for="email1">メールアドレス</label>
+            {!! Form::email('email', $users->email, ['class' => 'form-control', 'id' => 'email1', 'placeholder' => 'example@gmail.com', 'readonly']) !!}
           </div>
-          <div class="text-center">
-            {!! Form::submit('購入する', ['class' => 'btn btn-primary']) !!}
-          </div>
+        <div class="text-center">
+          {!! Form::submit('購入する', ['class' => 'btn btn-primary']) !!}
+        </div>
         {!! Form::close() !!}
       </div>
     </div>

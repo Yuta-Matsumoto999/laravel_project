@@ -44,26 +44,29 @@
           </div>
         </div>
       </div>
-        {!! Form::open(['route' => ['sale.store.cart', $product->id]]) !!}
-          <div class='form'>
-            <div class="form-group col-3  @if($errors->has('quentity')) has-error @endif">
-              <label for="quentity1">数量</label>
-              {!! Form::text('quentity', null, ['class' => 'form-control form-control-sm', 'id' => 'jsNum', 'placeholder' => '1'])!!}
-              <span class="help-block">{{ $errors->first('quentity') }}</span>
-              {!! Form::hidden('price', $product->price, ['id' => 'item_price']) !!}
-              {!! Form::text('sumPrice', '', ['class' => 'form-control', 'id' => 'jsPrice', 'readonly']) !!}
-            </div>
-            <div class="form-group text-center">
-              {!! Form::submit('カートに入れる', ['class' => 'btn btn-primary total-sum']) !!}
-            </div>
+      {!! Form::open(['route' => ['sale.store.cart', $product->id]]) !!}
+        <div class="form-row">
+          <div class="form-group col-3  @if($errors->has('quentity')) has-error @endif">
+            <label for="quentity1">数量</label>
+            {!! Form::text('quentity', null, ['class' => 'form-control form-control-sm', 'id' => 'jsNum', 'placeholder' => '1'])!!}
+            <span class="help-block">{{ $errors->first('quentity') }}</span>
+            {!! Form::hidden('price', $product->price, ['id' => 'item_price']) !!}
           </div>
-        {!! Form::close() !!}
+          <div class="form-group col-6">
+            <label for="quentity1">合計金額 (税抜)</label>
+            {!! Form::text('sumPrice', '', ['class' => 'form-control form-control-sm text-center', 'id' => 'jsPrice', 'readonly']) !!}
+          </div>
+        </div>
+        <div class="form-group text-center">
+          {!! Form::submit('カートに入れる', ['class' => 'btn btn-primary total-sum']) !!}
+        </div>
+          </div>
+      {!! Form::close() !!}
     </div>
   </div>
 </main>
 <script>
   $(function(){ 
-    var maxNum = 20; 
     var tagInput = $('#jsNum'); 
     var tagOutput = $('#jsPrice'); 
     tagInput.on('change', function() {
@@ -72,9 +75,7 @@
       var num = Number(str.replace(/[^0-9]/g, '')); 
       if(num == 0) {
         num = '';
-      } else if (num > maxNum) { 
-        num = maxNum;
-      }
+      } 
       $(this).val(num);
       if(num != 0) {
         var price = num * value;
