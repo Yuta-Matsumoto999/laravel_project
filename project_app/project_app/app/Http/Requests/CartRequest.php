@@ -24,7 +24,7 @@ class CartRequest extends FormRequest
     public function rules()
     {
         return [
-          'quentity' => "required|integer|max: 20",
+          'quentity' => "required|integer"
         ];
     }
 
@@ -37,8 +37,7 @@ class CartRequest extends FormRequest
     {
         return [
             'required' => '必須の項目です',
-            'integer' => '数字のみで入力してください',
-            'max' => "注文個数は:max個までです"
+            'integer' => '数字以外は入力できません',
         ];
     }
 }
