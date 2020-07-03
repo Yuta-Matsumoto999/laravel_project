@@ -30,12 +30,6 @@ class Cart extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function sumPrice($input)
-    {
-        $sumPrice = $input['price'] * $input['quentity'];
-        return $sumPrice;
-    }
-
     public function checkoutCart()
     {
         $this->where('user_id', Auth::id())->delete();

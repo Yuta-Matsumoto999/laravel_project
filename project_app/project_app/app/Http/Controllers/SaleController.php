@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CartRequest;
 use App\Http\Requests\ContactRequest;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\CartRequest;
 use App\Product;
 use App\Cart;
 use App\TagCategory;
 use App\User;
 use App\Contact;
+use App\Buy;
 use Auth;
 
 class SaleController extends Controller
@@ -20,8 +20,9 @@ class SaleController extends Controller
     private $tagCategory;
     private $user;
     private $contact;
+    private $buy;
 
-    public function __construct(Product $product, Cart $cart, TagCategory $tagCategory, User $user, Contact $contact)
+    public function __construct(Product $product, Cart $cart, TagCategory $tagCategory, User $user, Contact $contact, Buy $buy)
     {
         $this->middleware('auth');
         $this->product = $product;
@@ -29,6 +30,7 @@ class SaleController extends Controller
         $this->tagCategory = $tagCategory;
         $this->user = $user;
         $this->contact = $contact;
+        $this->buy = $buy;
     }
 
     public function index(Request $request)
@@ -86,7 +88,7 @@ class SaleController extends Controller
     {
         $inputs = $request->all();
         $this->cart->find($cartId)->fill($inputs)->save();
-        return redirect()->route('sale.index');
+        return redirect()->route('sale.show.cart');
     }
 
     public function showCartPurchase(Request $request)
@@ -100,10 +102,8 @@ class SaleController extends Controller
     }
 
 
-    public function storeCartPurchase(UserRequest $request)
+    public function storeCartPurchase(Request $request)
     {
-        $user = $request->except('product_id');
-        $this->user->find(Auth::id())->fill($user)->save();
         $this->cart->checkoutCart();
         return view('user.completePurchase');
     }
@@ -123,13 +123,13 @@ class SaleController extends Controller
     public function contact($contactId)
     {
         $contact = $this->contact->find($contactId);
-        return view('user.showContact', compact('cantact'));
+        return view('user.showContact', compact('contact'));
     }
 
 
     public function destroyContact($contactId)
     {
         $this->contact->find($contactId)->delete();
-        return redirect()->to('sale.show.mydata');
+        return redirect()->route('sale.show.myquestion');
     }
 }
