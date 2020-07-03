@@ -47,9 +47,10 @@
           {!! Form::open(['route' => ['sale.update.cart', $cart->id], 'method' => 'PUT']) !!}
             <div class="form-group col-3 @if($errors->has('quentity')) has-error @endif">
               <label for="quentity1">数量</label>
-              {!! Form::text('quentity', $cart->quentity, ['class' => 'form-control form-control-sm', 'id' => 'quentity1', 'placeholder' => '1']) !!}
+              {!! Form::text('quentity', $cart->quentity, ['class' => 'form-control form-control-sm', 'id' => 'jsNum', 'placeholder' => '1']) !!}
               <span class="help-block">{{ $errors->first('quentity') }}</span>
-              {!! Form::hidden('price', $cart->products->price) !!}
+              {!! Form::hidden('price', $cart->products->price,['id' => 'item_price']) !!}
+              {!! Form::text('sumPrice', '', ['class' => 'form-cotrol', 'id' => 'jsPrice', 'readonly']) !!}
             </div>
             <div class="form-group text-center">
               {!! Form::submit('変更する', ['class' => 'btn btn-primary']) !!}
@@ -58,4 +59,26 @@
     </div>
   </div>
 </main>
+<script>
+  $(function(){ 
+    var maxNum = 20; 
+    var tagInput = $('#jsNum'); 
+    var tagOutput = $('#jsPrice'); 
+    tagInput.on('change', function() {
+      var value = $("#item_price").val();
+      var str = $(this).val();
+      var num = Number(str.replace(/[^0-9]/g, '')); 
+      if(num == 0) {
+        num = '';
+      } else if (num > maxNum) { 
+        num = maxNum;
+      }
+      $(this).val(num);
+      if(num != 0) {
+        var price = num * value;
+        tagOutput.val(price);
+      }
+    });
+  });
+  </script>
 @endsection

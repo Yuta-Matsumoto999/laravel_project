@@ -6,13 +6,13 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          @if ($product->phpto === null)
+          @if ($product->photo === null)
           <div class="text-center">
-            <img src="/logo.image/20150701073916.png" alt="商品画像がありません" class="img-fluid">
+            <img src="{{ asset('/logo.image/20150701073916.png') }}" alt="商品画像がありません" class="img-fluid">
           </div>
           @else
           <div class="text-center">
-            <img src="/image/{{ $product->photo }}" alt="商品画像がありません" class="img-fluid rounded text-center">
+            <img src="/image{{ $product->photo }}" alt="商品画像がありません" class="img-fluid rounded text-center">
           </div>
           @endif
         </div>
@@ -21,7 +21,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-          <h3 class="buy_item_menu" date-price="{{ $product->price }}">小計  (税抜) : {{ $product->price }}円</h3>
+          <h3>小計  (税抜) : {{ $product->price }}円</h3>
         </div>
       </div>
       <div class="row">
@@ -50,7 +50,8 @@
               <label for="quentity1">数量</label>
               {!! Form::text('quentity', null, ['class' => 'form-control form-control-sm', 'id' => 'jsNum', 'placeholder' => '1'])!!}
               <span class="help-block">{{ $errors->first('quentity') }}</span>
-              {!! Form::hidden('price', $product->price) !!}
+              {!! Form::hidden('price', $product->price, ['id' => 'item_price']) !!}
+              {!! Form::text('sumPrice', '', ['class' => 'form-control', 'id' => 'jsPrice', 'readonly']) !!}
             </div>
             <div class="form-group text-center">
               {!! Form::submit('カートに入れる', ['class' => 'btn btn-primary total-sum']) !!}
@@ -60,4 +61,26 @@
     </div>
   </div>
 </main>
+<script>
+  $(function(){ 
+    var maxNum = 20; 
+    var tagInput = $('#jsNum'); 
+    var tagOutput = $('#jsPrice'); 
+    tagInput.on('change', function() {
+      var value = $("#item_price").val();
+      var str = $(this).val();
+      var num = Number(str.replace(/[^0-9]/g, '')); 
+      if(num == 0) {
+        num = '';
+      } else if (num > maxNum) { 
+        num = maxNum;
+      }
+      $(this).val(num);
+      if(num != 0) {
+        var price = num * value;
+        tagOutput.val(price);
+      }
+    });
+  });
+  </script>
 @endsection

@@ -11,7 +11,6 @@ use App\Cart;
 use App\TagCategory;
 use App\User;
 use App\Contact;
-use Illuminate\Support\Facades\DB;
 use Auth;
 
 class SaleController extends Controller
@@ -64,8 +63,6 @@ class SaleController extends Controller
     {
         $inputs = $request->all();
         $this->cart->user_id = Auth::id();
-        $sumPrice = $inputs['quentity']*$inputs['price'];
-        $this->cart->sumPrice = $sumPrice;
         $this->cart->product_id = $productId;
         $this->cart->fill($inputs)->save();
         return redirect()->route('sale.show.cart');
@@ -88,11 +85,8 @@ class SaleController extends Controller
     public function updateCart(CartRequest $request, $cartId)
     {
         $inputs = $request->all();
-        $sumPrice = $inputs['quentity']*$inputs['price'];
-        $this->cart->find($cartId)->sumPrice = $sumPrice;
         $this->cart->find($cartId)->fill($inputs)->save();
         return redirect()->route('sale.index');
-
     }
 
     public function showCartPurchase(Request $request)
@@ -120,5 +114,22 @@ class SaleController extends Controller
         return redirect()->route('sale.show.cart');
     }
 
+    public function showMycontact()
+    {
+        $contacts = $this->contact->where('user_id', Auth::id())->get();
+        return view('user.mycontact', compact('contacts'));
+    }
 
+    public function contact($contactId)
+    {
+        $contact = $this->contact->find($contactId);
+        return view('user.showContact', compact('cantact'));
+    }
+
+
+    public function destroyContact($contactId)
+    {
+        $this->contact->find($contactId)->delete();
+        return redirect()->to('sale.show.mydata');
+    }
 }
