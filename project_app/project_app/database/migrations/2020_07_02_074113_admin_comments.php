@@ -20,7 +20,7 @@ class AdminComments extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('contact_id')->references('id')->on('adminComments');
+            $table->foreign('contact_id')->references('id')->on('contacts');
         });
     }
 
