@@ -60,19 +60,12 @@
         <!-- タブ型ナビゲーション -->
         <div class="nav nav-tabs category-wrap" id="tab-menus" role="tablist">
           <!-- タブ01 -->
-          <a class="nav-item nav-link active category" id="" data-toggle="tab" href="#panel-menu01" role="tab" aria-controls="panel-menu01" aria-selected="true">ALL</a>
+          <a class="nav-item nav-link active category" id="" data-toggle="tab" href="" role="tab" aria-controls="" aria-selected="true">ALL</a>
           @foreach ($tagCategories as $tagCategory)
-          <a class="nav-item nav-link active category" id="{{ $tagCategory->id }}" data-toggle="tab" href="#panel-menu01" role="tab" aria-controls="panel-menu01" aria-selected="true">{{ $tagCategory->name }}</a>
+          <a class="nav-item nav-link active category" id="{{ $tagCategory->id }}" data-toggle="tab" href="" role="tab" aria-controls="" aria-selected="true">{{ $tagCategory->name }}</a>
           @endforeach
           {!! Form::hidden('tag_category_id', $searches['tag_category_id'] ??  null, ['id' => 'category-val']) !!}
-
         {!! Form::close() !!}
-          {{-- <!-- タブ02 -->
-          <a class="nav-item nav-link" id="tab-menu02" data-toggle="tab" href="#panel-menu02" role="tab" aria-controls="panel-menu02" aria-selected="false">モーニング</a>
-          <!-- タブ03 -->
-          <a class="nav-item nav-link" id="tab-menu03" data-toggle="tab" href="#panel-menu03" role="tab" aria-controls="panel-menu03" aria-selected="false">ランチ</a>
-          <!-- タブ04 -->
-          <a class="nav-item nav-link" id="tab-menu04" data-toggle="tab" href="#panel-menu04" role="tab" aria-controls="panel-menu04" aria-selected="false">ケーキ</a> --}}
         </div>
         <!-- /タブ型ナビゲーション -->
         <!-- パネル -->
@@ -113,9 +106,8 @@
             @endforeach
           </div>
         </div>
-        {{ $products->appends($searches)->links() }}
-        </div>
       </div>
+        {{ $products->appends($searches)->links() }}
     </section>
   </div>
 </main>

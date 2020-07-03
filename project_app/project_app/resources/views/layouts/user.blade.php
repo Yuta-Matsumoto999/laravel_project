@@ -39,16 +39,23 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('sale.show.contact') }}">Contact</a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mypage</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="">購入履歴</a>
+            <a class="dropdown-item" href="{{ route('sale.show.myquestion') }}">問い合わせ一覧</a>
+          </div>
+        </li>
         <li class="nav-item">
-          {!! Form::open(['route' => ['logout']]) !!}
-            {!! Form::submit('Logout', ['class' => 'btn btn-primary']) !!}
-          {!! Form::close() !!}
+          <a href="{{ route('sale.show.cart') }}" class="nav-link btn btn-info">Cart</a>
         </li>
       </ul>
       <!-- 右側メニュー：Contactページへのリンク -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a href="{{ route('sale.show.cart') }}" class="nav-link btn btn-info">Cart</a>
+          {!! Form::open(['route' => ['logout']]) !!}
+            {!! Form::submit('Logout', ['class' => 'btn btn-primary']) !!}
+          {!! Form::close() !!}
         </li>
       </ul>
       <!-- /ナビゲーションメニュー -->

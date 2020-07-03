@@ -20,4 +20,9 @@ class Contact extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function comment()
+    {
+        return $this->hasMany(adminComment::class, 'contact_id');
+    }
 }
